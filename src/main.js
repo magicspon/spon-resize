@@ -26,9 +26,9 @@ export default () => {
 		once.value = arg
 	}
 
-	const match = (breakpoint, resolve, reject) => {
-		const match = window.matchMedia(breakpoint).matches
-		match ? once(match, resolve) : once(match, reject)
+	const match = (breakpoint, match, unmatch) => {
+		const state = window.matchMedia(breakpoint).matches
+		state ? once(state, match) : once(state, unmatch)
 	}
 
 	const dispatch = () =>
@@ -44,11 +44,11 @@ export default () => {
 			events.emit('view:resize', { width, height })
 		})
 
-	const at = (breakpoint, resolve, reject) => {
-		match(breakpoint, resolve, reject)
+	const at = (breakpoint, { match = () => {}, unmatch = () => {} }) => {
+		match(breakpoint, match, unmatch)
 
 		events.on('view:resize', () => {
-			match(breakpoint, resolve, reject)
+			match(breakpoint, match, unmatch)
 		})
 	}
 
