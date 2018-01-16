@@ -9,6 +9,7 @@ export default () => {
 
 	let width = window.innerWidth
 	let height = window.innerHeight
+	let ratio = width / height
 	let handle
 	let last
 	let query = getCurrentBreakpoint()
@@ -16,8 +17,9 @@ export default () => {
 	const update = () => {
 		width = window.innerWidth
 		height = window.innerHeight
+		ratio = width / height
 
-		return { width, height }
+		return { width, height, ratio }
 	}
 
 	const once = (arg, fn) => {
@@ -26,7 +28,7 @@ export default () => {
 		once.value = arg
 	}
 
-	const match = (breakpoint, match, unmatch) => {
+	const test = (breakpoint, match, unmatch) => {
 		const state = window.matchMedia(breakpoint).matches
 		state ? once(state, match) : once(state, unmatch)
 	}
@@ -36,19 +38,19 @@ export default () => {
 			update()
 			query = getCurrentBreakpoint()
 
+			events.emit('view:resize', { width, height, query, ratio })
+
 			if (last !== query) {
-				events.emit('view:change', { width, height, query })
+				events.emit('view:change', { width, height, query, ratio })
 				last = query
 			}
-
-			events.emit('view:resize', { width, height })
 		})
 
 	const at = (breakpoint, { match = () => {}, unmatch = () => {} }) => {
-		match(breakpoint, match, unmatch)
+		test(breakpoint, match, unmatch)
 
 		events.on('view:resize', () => {
-			match(breakpoint, match, unmatch)
+			test(breakpoint, match, unmatch)
 		})
 	}
 
