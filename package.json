@@ -1,6 +1,6 @@
 {
 	"name": "spon-resize",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"main": "dist/index.min.js",
 	"devDependencies": {
 		"babel-core": "^6.26.0",
@@ -17,9 +17,7 @@
 		"build": "rollup -c",
 		"dev": "NODE_ENV=development rollup -c -w"
 	},
-	"files": [
-		"dist"
-	],
+	"files": ["dist"],
 	"description": "Throttle resize event and helpers",
 	"repository": {
 		"type": "git",
