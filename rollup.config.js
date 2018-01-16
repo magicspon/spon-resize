@@ -3,6 +3,7 @@ import pkg from './package.json'
 import uglify from 'rollup-plugin-uglify'
 import commonjs from 'rollup-plugin-commonjs'
 import nodeResolve from 'rollup-plugin-node-resolve'
+import filesize from 'rollup-plugin-filesize'
 
 export default [
 	{
@@ -11,6 +12,7 @@ export default [
 		format: 'umd',
 		moduleName: 'sponResize',
 		plugins: [
+			filesize(),
 			babel({
 				exclude: ['node_modules/**']
 			}),
