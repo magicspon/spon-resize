@@ -4,10 +4,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 
 ### 0.1.0
 
-* observerLoop renamed to inview
-* inview will only run when the user scrolls
+#### Added
 
-### 0.0.1
+* .at method now accepts a media query and an object with match/unmatch props
 
 #### Added
 

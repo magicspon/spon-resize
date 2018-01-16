@@ -1,6 +1,6 @@
 {
 	"name": "spon-resize",
-	"version": "0.0.2",
+	"version": "0.1.0",
 	"main": "dist/index.min.js",
 	"devDependencies": {
 		"babel-core": "^6.26.0",
