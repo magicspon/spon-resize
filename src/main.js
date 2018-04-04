@@ -33,18 +33,17 @@ export default () => {
 		state ? once(state, match) : once(state, unmatch)
 	}
 
-	const dispatch = () =>
-		requestAnimationFrame(() => {
-			update()
-			query = getCurrentBreakpoint()
+	const dispatch = () => {
+		update()
+		query = getCurrentBreakpoint()
 
-			events.emit('view:resize', { width, height, query, ratio })
+		events.emit('view:resize', { width, height, query, ratio })
 
-			if (last !== query) {
-				events.emit('view:change', { width, height, query, ratio })
-				last = query
-			}
-		})
+		if (last !== query) {
+			events.emit('view:change', { width, height, query, ratio })
+			last = query
+		}
+	}
 
 	const at = (breakpoint, { match = () => {}, unmatch = () => {} }) => {
 		test(breakpoint, match, unmatch)
@@ -68,6 +67,7 @@ export default () => {
 		...events,
 		width,
 		height,
+		query,
 		at,
 		start,
 		destroy,
