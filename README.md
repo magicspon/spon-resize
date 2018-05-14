@@ -45,12 +45,13 @@ On window resize the *at* method will call either the match function or unmatch 
 
 ```
 screen.at(
-  '(min-width: 400px)',
-  match: () => {
-    console.log('query is true')
-  },
-  unmatch: () => {
-    console.log('query is false')
+  '(min-width: 400px)', {
+    match: () => {
+      console.log('query is true')
+    },
+    unmatch: () => {
+      console.log('query is false')
+    }
   }
 )
 ```
